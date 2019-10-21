@@ -89,4 +89,8 @@ class CharacterListAdapter(
 
     }
 
+    fun getCharacterInPosition(position: Int): CharacterModel {
+        return characters[position]
+    }
+
 }

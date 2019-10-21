@@ -1,5 +1,6 @@
 package br.com.marvel.characters.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -16,6 +17,10 @@ import br.com.marvel.characters.viewmodel.CharacterListViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CharacterListActivity : BaseActivity(), OnCharacterListener {
+
+    companion object {
+        val DETAIL_REQUEST = 1
+    }
 
     private val characterViewModel : CharacterListViewModel by viewModel()
     private val adapter = CharacterListAdapter( this)
@@ -60,6 +65,9 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
 
     override fun onCharacterClick(position: Int) {
         Toast.makeText(this, "Hero #$position has been clicked!", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, CharacterDetailActivity::class.java)
+        intent.putExtra("hero", adapter.getCharacterInPosition(position))
+        startActivityForResult(intent, DETAIL_REQUEST)
     }
 
 }

@@ -23,6 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".characters.view.CharacterDetailActivity"
+            android:parentActivityName=".characters.view.CharacterListActivity"/>
     </application>
 
 </manifest>
