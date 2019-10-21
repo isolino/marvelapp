@@ -1,4 +1,4 @@
-package br.com.marvel.view
+package br.com.marvel.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

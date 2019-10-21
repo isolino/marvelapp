@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.marvel.R
+import br.com.marvel.adapters.CharacterListAdapter
 import br.com.marvel.databinding.ActivityCharacterListBinding
 import br.com.marvel.repository.CharacterRepository
 import br.com.marvel.requests.Resource
@@ -38,7 +39,8 @@ class CharacterListActivity : BaseActivity() {
         viewModel.getChars().observe(this, Observer { resource ->
             resource?.let {
                 when (it){
-                    is Resource.Success -> binding.recyclerView.adapter = CharacterListAdapter(this, it.data ?: emptyList())
+                    is Resource.Success -> binding.recyclerView.adapter =
+                        CharacterListAdapter(this, it.data ?: emptyList())
                     is Resource.Loading -> showProgressBar(true)
                     is Resource.Error -> Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
