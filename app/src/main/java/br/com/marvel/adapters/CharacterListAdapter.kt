@@ -13,6 +13,7 @@ class CharacterListAdapter(
     companion object{
         private const val CHARACTER_VIEW = 1
         private const val LOADING_VIEW = 2
+        private const val ERROR_VIEW = 3
     }
 
     private var characters: List<CharacterModel> = emptyList()
@@ -37,6 +38,11 @@ class CharacterListAdapter(
                     .inflate(R.layout.layout_loading_list_item, parent, false)
                 LoadingViewHolder(itemView)
             }
+            ERROR_VIEW -> {
+                val itemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.layout_error_list_item, parent, false)
+                LoadingViewHolder(itemView)
+            }
             else -> throw IllegalStateException("viewType $viewType is not correct")
         }
 
@@ -45,16 +51,31 @@ class CharacterListAdapter(
     override fun getItemViewType(position: Int): Int {
         return when{
             characters[position] == CharacterModel.LOADING -> LOADING_VIEW
+            characters[position] == CharacterModel.ERROR -> ERROR_VIEW
             position == characters.lastIndex && position != 0 -> LOADING_VIEW
             else -> CHARACTER_VIEW
         }
     }
 
+    private fun cleanErrorsModel(){
+        val removeLoadingAndErrorPredicate : (CharacterModel) -> Boolean = {
+            (it != CharacterModel.ERROR) && (it != CharacterModel.LOADING)
+        }
+        characters = characters.filter(removeLoadingAndErrorPredicate)
+    }
+
     fun displayLoading(){
+        cleanErrorsModel()
         if (isNotLoading()){
             characters = characters.plus(listOf(CharacterModel.LOADING))
             notifyDataSetChanged()
         }
+    }
+
+    fun displayError(){
+        cleanErrorsModel()
+        characters = characters.plus(listOf(CharacterModel.ERROR))
+        notifyDataSetChanged()
     }
 
     private fun isNotLoading() : Boolean{

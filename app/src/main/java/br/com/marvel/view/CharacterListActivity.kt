@@ -60,7 +60,7 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
                 when (it){
                     is Resource.Success -> adapter.setCharacters(it.data.orEmpty())
                     is Resource.Loading -> adapter.displayLoading()
-                    is Resource.Error -> Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    is Resource.Error -> adapter.displayError()
                 }
             }
         })

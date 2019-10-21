@@ -16,15 +16,14 @@
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
-        <ProgressBar
+        <TextView
+            android:text="@string/n_o_foi_poss_vel_carregar_os_personagens"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/appbar_padding_top"
-            android:indeterminateOnly="true"
-            android:indeterminateDuration="10"
-            android:indeterminateBehavior="repeat"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+            android:gravity="center"
+            android:textStyle="bold|italic"
+            android:textColor="@color/red"/>
 
     </androidx.cardview.widget.CardView>
 

@@ -12,5 +12,6 @@ data class CharacterModel(
 ) : Parcelable{
     companion object {
         val LOADING = CharacterModel(-1, null, null, null)
+        val ERROR = CharacterModel(-2, null, null, null)
     }
 }
