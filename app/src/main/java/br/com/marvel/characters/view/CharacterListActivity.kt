@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.marvel.BaseActivity
 import br.com.marvel.R
 import br.com.marvel.characters.adapters.CharacterListAdapter
 import br.com.marvel.characters.adapters.OnCharacterListener

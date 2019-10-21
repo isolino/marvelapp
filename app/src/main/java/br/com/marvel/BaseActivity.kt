@@ -1,4 +1,4 @@
-package br.com.marvel.characters.view
+package br.com.marvel
 
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
