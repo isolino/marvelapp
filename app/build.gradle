@@ -34,6 +34,7 @@ dependencies {
     def retrofitVersion = "2.6.2"
     def lifecycleVersion = "2.1.0"
     def picassoVersion = "2.71828"
+    def koinVersion = "2.0.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -49,6 +50,9 @@ dependencies {
 
     //Picasso
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    //Koin
+    implementation "org.koin:koin-android-viewmodel:$koinVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
