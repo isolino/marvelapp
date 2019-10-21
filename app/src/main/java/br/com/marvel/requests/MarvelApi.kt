@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface MarvelApi {
 
     @GET("characters")
-    fun getCharacters(@Query("limit") limit: Int = 50,
+    fun getCharacters(@Query("limit") limit: Int = 30,
                       @Query("offset") offset: Int = 0,
                       @Query("ts") ts: String,
                       @Query("apikey") apiKey: String,
