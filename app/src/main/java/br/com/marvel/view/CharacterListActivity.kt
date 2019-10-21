@@ -3,9 +3,11 @@ package br.com.marvel.view
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.adapters.AbsListViewBindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.marvel.R
 import br.com.marvel.adapters.CharacterListAdapter
 import br.com.marvel.adapters.OnCharacterListener
@@ -29,6 +31,14 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
             R.layout.activity_character_list)
     }
 
+    private val scrollToNextPageListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            if(!recyclerView.canScrollVertically(1)){
+                viewModel.fecthChars(nextPage = true)
+            }
+        }
+    }
+
     private val adapter = CharacterListAdapter( this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +51,7 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addOnScrollListener(scrollToNextPageListener)
     }
 
     private fun subscribeObservers(){

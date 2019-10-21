@@ -43,12 +43,16 @@ class CharacterListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (characters[position] == CharacterModel.LOADING) LOADING_VIEW else CHARACTER_VIEW
+        return when{
+            characters[position] == CharacterModel.LOADING -> LOADING_VIEW
+            position == characters.lastIndex && position != 0 -> LOADING_VIEW//todo trate exausted
+            else -> CHARACTER_VIEW
+        }
     }
 
     fun displayLoading(){
         if (isNotLoading()){
-            characters = listOf(CharacterModel.LOADING)
+            characters = characters.plus(listOf(CharacterModel.LOADING))
             notifyDataSetChanged()
         }
     }

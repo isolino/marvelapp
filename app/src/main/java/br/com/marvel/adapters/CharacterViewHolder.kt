@@ -15,6 +15,7 @@ class CharacterViewHolder(
     fun bind(characterModel: CharacterModel) {
         itemView.name.text = characterModel.name
         itemView.description.text = characterModel.description
+        itemView.idx.text = characterModel.id.toString()
 
         Picasso.get()
             .load(ThumbnailUtil.thumbnailUrl(characterModel, ThumbnailUtil.LANDSCAPE_AMAZING))
