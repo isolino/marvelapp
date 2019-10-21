@@ -21,42 +21,21 @@ class CharacterListAdapter(
 
     override fun getItemCount() = items.size
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val v = LayoutInflater.from(parent.context)
+        return CharacterViewHolder(v, parent)
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as CharacterViewHolder).bind(items[position])
+    }
+
     interface OnItemClickListener {
         fun onItemClick(view: View, obj: CharacterModel, position: Int)
     }
 
     fun setOnItemClickListener(mItemClickListener: OnItemClickListener) {
         this.mOnItemClickListener = mItemClickListener
-    }
-
-    inner class CharacterViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.item_character_card, parent, false)) {
-        var image: ImageView = itemView.findViewById(R.id.image)
-        var name: TextView = itemView.findViewById(R.id.name)
-        var description: TextView = itemView.findViewById(R.id.description)
-
-
-        fun bind(characterModel: CharacterModel) {
-            name.text = characterModel.name
-            description.text = characterModel.description
-
-            Picasso.get()
-                .load(ThumbnailUtil.thumbnailUrl(characterModel, ThumbnailUtil.LANDSCAPE_AMAZING))
-                .into(image)
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val vh: RecyclerView.ViewHolder
-        val v = LayoutInflater.from(parent.context)
-        vh = CharacterViewHolder(v, parent)
-        return vh
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is CharacterViewHolder) {
-            holder.bind(items[position])
-        }
     }
 
 }
