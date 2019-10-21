@@ -29,7 +29,7 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
             R.layout.activity_character_list)
     }
 
-    private val adapter = CharacterListAdapter(emptyList(), this)
+    private val adapter = CharacterListAdapter( this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,9 +7,10 @@ import br.com.marvel.R
 import br.com.marvel.models.CharacterModel
 
 class CharacterListAdapter(
-    private var characters: List<CharacterModel>,
     private val onCharacterListener: OnCharacterListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var characters: List<CharacterModel> = emptyList()
 
     fun setCharacters(characters: List<CharacterModel>){
         this.characters = characters
