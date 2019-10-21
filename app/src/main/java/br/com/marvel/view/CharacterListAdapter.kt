@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.marvel.R
 import br.com.marvel.models.CharacterModel
+import br.com.marvel.util.ThumbnailUtil
+import com.squareup.picasso.Picasso
 
 class CharacterListAdapter(
     private val ctx: Context,
@@ -37,11 +39,10 @@ class CharacterListAdapter(
         fun bind(characterModel: CharacterModel) {
             name.text = characterModel.name
             description.text = characterModel.description
-            //Tools.displayImageOriginal(ctx, view.image, n.image)
-//            view.lytParent.setOnClickListener(View.OnClickListener { view ->
-//                if (mOnItemClickListener == null) return@OnClickListener
-//                mOnItemClickListener!!.onItemClick(view, items[position], position)
-//            })
+
+            Picasso.get()
+                .load(ThumbnailUtil.thumbnailUrl(characterModel, ThumbnailUtil.LANDSCAPE_AMAZING))
+                .into(image)
         }
     }
 

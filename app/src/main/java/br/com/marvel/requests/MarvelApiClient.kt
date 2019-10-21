@@ -11,80 +11,69 @@ import br.com.marvel.util.Constants.PRIVATE_KEY
 import br.com.marvel.util.Constants.PUBLIC_KEY
 import br.com.marvel.util.md5
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 class MarvelApiClient {
 
-    private val _characters = MutableLiveData<List<CharacterModel>>()
-    private var runnable : RetrieveCharsRunnable? = null
+    private val _characters = MutableLiveData<Resource<List<CharacterModel>>>()
 
-    fun getChars() : LiveData<List<CharacterModel>>{
+    fun getChars() : LiveData<Resource<List<CharacterModel>>>{
         return _characters
     }
 
-    fun getCharsApi(offset: Int){
-        if (runnable != null) {
-            runnable = null
-        }
-        runnable = RetrieveCharsRunnable(offset, true)
-        val handler = AppExecutors.instance.netWorkIO.submit {
-            //retrive data from rest api
-    //            _characters.value
-        }
+    fun fetchChars(offset: Int){
 
-        AppExecutors.instance.netWorkIO.schedule({
-            //let user know its timed out
-            handler.cancel(true)
-        }, NETWORK_TIMEOUT, TimeUnit.MILLISECONDS)
+        val ts = System.currentTimeMillis().toString()
+        val concatenation = ts + PRIVATE_KEY + PUBLIC_KEY
+        val hash = concatenation.md5()
+
+        ServiceGenerator.getMarvelApi().getCharacters(
+            offset = offset, ts = ts, apiKey = PUBLIC_KEY, hash = hash
+        ).enqueue(CharsCallback(_characters))
+
     }
 
-    inner class RetrieveCharsRunnable(
-        private val offset: Int, var cancelable: Boolean
-    ) : Runnable {
-        override fun run() {
-            try {
-                val response = getChars(offset).execute()
-                if (cancelable){
-                    return
-                }
+    inner class CharsCallback(
+        private val liveDataResult : MutableLiveData<Resource<List<CharacterModel>>>
+    ) : Callback<CharactersResponse> {
+        override fun onResponse(
+            call: Call<CharactersResponse>,
+            response: Response<CharactersResponse>
+        ) {
 
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        if (it.data.offset == 0){
-                            _characters.postValue(it.data.results)
-                        } else {
-                            val updatedList = _characters.value?.plus(it.data.results)
-                            _characters.postValue(updatedList)
-                        }
-                    } ?: run {
-                        _characters.postValue(null)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    if (it.data.offset == 0){
+                        liveDataResult.postValue(Resource.Success(it.data.results))
+                    } else {
+                        val updatedList = _characters.value?.data?.plus(it.data.results) ?: it.data.results
+                        _characters.postValue(Resource.Success(updatedList))
                     }
-                } else {
-                    response.errorBody()?.let {
-                        Log.e("", it.string())
-                    }
-                    _characters.postValue(null)
+                } ?: run {
+                    liveDataResult.postValue(Resource.Success(emptyList()))
                 }
-            } catch (e : IOException){
-                e.printStackTrace()
-                _characters.postValue(null)
+            } else {
+                val error = response.errorBody()?.string() ?: "A error ocurred during retriving data"
+                liveDataResult.postValue(Resource.Error(error))
             }
+
         }
 
-        private fun getChars(offset : Int) : Call<CharactersResponse> {
-            val ts = System.currentTimeMillis().toString()
-            val concatenation = ts + PRIVATE_KEY + PUBLIC_KEY
-            val hash = concatenation.md5()
-
-            return ServiceGenerator.getMarvelApi().getCharacters(
-                offset = offset, ts = ts, apiKey = PUBLIC_KEY, hash = hash
-            )
-        }
-
-        private fun cancelRequest(){
-            Log.d("MarvelApiClient", "canceling the search request")
-            cancelable = true
+        override fun onFailure(call: Call<CharactersResponse>, t: Throwable) {
+            Log.e("NetworkCallback", "error during retriving data", t)
+            liveDataResult.postValue(Resource.Error("Can't complete connection"))
         }
     }
+}
+
+sealed class Resource<T>(
+    val data: T? = null,
+    val message: String? = null
+) {
+    class Success<T>(data: T) : Resource<T>(data)
+    class Loading<T>(data: T? = null) : Resource<T>(data)
+    class Error<T>(message: String, data: T? = null) : Resource<T>(data, message)
 }

@@ -15,7 +15,7 @@ class ServiceGenerator {
 
         private val marvelApi = retrofit.create(MarvelApi::class.java)
 
-        fun getMarvelApi() = marvelApi
+        fun getMarvelApi() : MarvelApi = marvelApi
 
         fun getMarvelApiClient() = MarvelApiClient()
     }
