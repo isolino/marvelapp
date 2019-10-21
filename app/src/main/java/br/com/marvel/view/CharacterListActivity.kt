@@ -47,8 +47,8 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
         viewModel.getChars().observe(this, Observer { resource ->
             resource?.let {
                 when (it){
-                    is Resource.Success -> adapter.setCharacters(it.data ?: emptyList())
-                    is Resource.Loading -> showProgressBar(true)
+                    is Resource.Success -> adapter.setCharacters(it.data.orEmpty())
+                    is Resource.Loading -> adapter.displayLoading()
                     is Resource.Error -> Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

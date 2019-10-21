@@ -9,4 +9,8 @@ data class CharacterModel(
     val name: String?,
     val description: String?,
     val thumbnail: ThumbnailModel?
-) : Parcelable
+) : Parcelable{
+    companion object {
+        val LOADING = CharacterModel(-1, null, null, null)
+    }
+}

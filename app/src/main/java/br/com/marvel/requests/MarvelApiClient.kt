@@ -30,6 +30,8 @@ class MarvelApiClient {
         val concatenation = ts + PRIVATE_KEY + PUBLIC_KEY
         val hash = concatenation.md5()
 
+        _characters.postValue(Resource.Loading(_characters.value?.data.orEmpty()))
+
         ServiceGenerator.getMarvelApi().getCharacters(
             offset = offset, ts = ts, apiKey = PUBLIC_KEY, hash = hash
         ).enqueue(CharsCallback(_characters))

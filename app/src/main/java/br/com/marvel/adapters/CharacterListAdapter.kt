@@ -10,6 +10,11 @@ class CharacterListAdapter(
     private val onCharacterListener: OnCharacterListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    companion object{
+        private const val CHARACTER_VIEW = 1
+        private const val LOADING_VIEW = 2
+    }
+
     private var characters: List<CharacterModel> = emptyList()
 
     fun setCharacters(characters: List<CharacterModel>){
@@ -20,13 +25,43 @@ class CharacterListAdapter(
     override fun getItemCount() = characters.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_character_card, parent, false)
-        return CharacterViewHolder(itemView, onCharacterListener)
+
+        return when(viewType){
+            CHARACTER_VIEW -> {
+                val itemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_character_card, parent, false)
+                CharacterViewHolder(itemView, onCharacterListener)
+            }
+            LOADING_VIEW -> {
+                val itemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.layout_loading_list_item, parent, false)
+                LoadingViewHolder(itemView)
+            }
+            else -> throw IllegalStateException("viewType $viewType is not correct")
+        }
+
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (characters[position] == CharacterModel.LOADING) LOADING_VIEW else CHARACTER_VIEW
+    }
+
+    fun displayLoading(){
+        if (isNotLoading()){
+            characters = listOf(CharacterModel.LOADING)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun isNotLoading() : Boolean{
+        return characters.isEmpty() || (characters.last() != CharacterModel.LOADING)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as CharacterViewHolder).bind(characters[position])
+        when (holder){
+            is CharacterViewHolder -> holder.bind(characters[position])
+        }
+
     }
 
 }
