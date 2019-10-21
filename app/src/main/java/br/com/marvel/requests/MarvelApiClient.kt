@@ -3,18 +3,14 @@ package br.com.marvel.requests
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.marvel.AppExecutors
 import br.com.marvel.models.CharacterModel
 import br.com.marvel.requests.responses.CharactersResponse
-import br.com.marvel.util.Constants.NETWORK_TIMEOUT
 import br.com.marvel.util.Constants.PRIVATE_KEY
 import br.com.marvel.util.Constants.PUBLIC_KEY
 import br.com.marvel.util.md5
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 class MarvelApiClient {
 
