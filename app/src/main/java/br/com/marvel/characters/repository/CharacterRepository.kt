@@ -1,9 +1,9 @@
-package br.com.marvel.repository
+package br.com.marvel.characters.repository
 
 import androidx.lifecycle.LiveData
-import br.com.marvel.models.CharacterModel
-import br.com.marvel.requests.MarvelApiClient
-import br.com.marvel.requests.Resource
+import br.com.marvel.characters.models.CharacterModel
+import br.com.marvel.characters.requests.MarvelApiClient
+import br.com.marvel.characters.requests.Resource
 
 class CharacterRepository(private val marvelApiClient: MarvelApiClient) {
 

@@ -1,6 +1,6 @@
-package br.com.marvel.requests
+package br.com.marvel.characters.requests
 
-import br.com.marvel.requests.responses.CharactersResponse
+import br.com.marvel.characters.requests.responses.CharactersResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,7 +1,7 @@
-package br.com.marvel.viewmodel
+package br.com.marvel.characters.viewmodel
 
 import androidx.lifecycle.ViewModel
-import br.com.marvel.repository.CharacterRepository
+import br.com.marvel.characters.repository.CharacterRepository
 
 class CharacterListViewModel(
     private val repository: CharacterRepository

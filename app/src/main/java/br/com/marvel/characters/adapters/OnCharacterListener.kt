@@ -1,4 +1,4 @@
-package br.com.marvel.adapters
+package br.com.marvel.characters.adapters
 
 interface OnCharacterListener {
     fun onCharacterClick(position: Int)

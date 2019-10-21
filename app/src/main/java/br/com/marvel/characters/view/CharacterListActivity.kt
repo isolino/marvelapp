@@ -1,4 +1,4 @@
-package br.com.marvel.view
+package br.com.marvel.characters.view
 
 import android.os.Bundle
 import android.widget.Toast
@@ -7,11 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.marvel.R
-import br.com.marvel.adapters.CharacterListAdapter
-import br.com.marvel.adapters.OnCharacterListener
+import br.com.marvel.characters.adapters.CharacterListAdapter
+import br.com.marvel.characters.adapters.OnCharacterListener
 import br.com.marvel.databinding.ActivityCharacterListBinding
-import br.com.marvel.requests.Resource
-import br.com.marvel.viewmodel.CharacterListViewModel
+import br.com.marvel.characters.requests.Resource
+import br.com.marvel.characters.viewmodel.CharacterListViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CharacterListActivity : BaseActivity(), OnCharacterListener {

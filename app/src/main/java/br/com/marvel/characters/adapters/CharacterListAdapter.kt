@@ -1,10 +1,10 @@
-package br.com.marvel.adapters
+package br.com.marvel.characters.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.marvel.R
-import br.com.marvel.models.CharacterModel
+import br.com.marvel.characters.models.CharacterModel
 
 class CharacterListAdapter(
     private val onCharacterListener: OnCharacterListener

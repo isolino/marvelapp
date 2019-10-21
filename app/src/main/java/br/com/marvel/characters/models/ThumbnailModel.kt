@@ -1,4 +1,4 @@
-package br.com.marvel.models
+package br.com.marvel.characters.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

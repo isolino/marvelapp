@@ -1,13 +1,13 @@
-package br.com.marvel.requests
+package br.com.marvel.characters.requests
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.marvel.models.CharacterModel
-import br.com.marvel.requests.responses.CharactersResponse
-import br.com.marvel.util.Constants.PRIVATE_KEY
-import br.com.marvel.util.Constants.PUBLIC_KEY
-import br.com.marvel.util.md5
+import br.com.marvel.characters.models.CharacterModel
+import br.com.marvel.characters.requests.responses.CharactersResponse
+import br.com.marvel.common.Constants.PRIVATE_KEY
+import br.com.marvel.common.Constants.PUBLIC_KEY
+import br.com.marvel.common.md5
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

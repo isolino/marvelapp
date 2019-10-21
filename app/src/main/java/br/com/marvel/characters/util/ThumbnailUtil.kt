@@ -1,6 +1,6 @@
-package br.com.marvel.util
+package br.com.marvel.characters.util
 
-import br.com.marvel.models.CharacterModel
+import br.com.marvel.characters.models.CharacterModel
 
 class ThumbnailUtil {
     companion object{

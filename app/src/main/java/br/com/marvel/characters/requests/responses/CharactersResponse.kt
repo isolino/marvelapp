@@ -1,6 +1,6 @@
-package br.com.marvel.requests.responses
+package br.com.marvel.characters.requests.responses
 
-import br.com.marvel.models.CharacterModel
+import br.com.marvel.characters.models.CharacterModel
 import com.google.gson.annotations.SerializedName
 
 data class CharactersResponse(

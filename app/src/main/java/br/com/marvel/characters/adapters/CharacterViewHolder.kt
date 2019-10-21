@@ -1,9 +1,9 @@
-package br.com.marvel.adapters
+package br.com.marvel.characters.adapters
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import br.com.marvel.models.CharacterModel
-import br.com.marvel.util.ThumbnailUtil
+import br.com.marvel.characters.models.CharacterModel
+import br.com.marvel.characters.util.ThumbnailUtil
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_character_card.view.*
 

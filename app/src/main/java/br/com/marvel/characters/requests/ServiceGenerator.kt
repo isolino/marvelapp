@@ -1,6 +1,6 @@
-package br.com.marvel.requests
+package br.com.marvel.characters.requests
 
-import br.com.marvel.util.Constants.BASE_URL
+import br.com.marvel.common.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

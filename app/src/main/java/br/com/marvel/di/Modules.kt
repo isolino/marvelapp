@@ -1,8 +1,8 @@
 package br.com.marvel.di
 
-import br.com.marvel.repository.CharacterRepository
-import br.com.marvel.requests.MarvelApiClient
-import br.com.marvel.viewmodel.CharacterListViewModel
+import br.com.marvel.characters.repository.CharacterRepository
+import br.com.marvel.characters.requests.MarvelApiClient
+import br.com.marvel.characters.viewmodel.CharacterListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
