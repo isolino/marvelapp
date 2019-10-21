@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_base.view.*
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    var progressbar : ProgressBar? = null
+    private var progressbar : ProgressBar? = null
 
     override fun setContentView(layoutResID: Int) {
         val constraintLayout = layoutInflater.inflate(R.layout.activity_base, null)

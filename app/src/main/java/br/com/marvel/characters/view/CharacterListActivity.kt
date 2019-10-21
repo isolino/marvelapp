@@ -17,6 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CharacterListActivity : BaseActivity(), OnCharacterListener {
 
     private val characterViewModel : CharacterListViewModel by viewModel()
+    private val adapter = CharacterListAdapter( this)
 
     private val binding by lazy {
         DataBindingUtil.setContentView<ActivityCharacterListBinding>(this,
@@ -30,8 +31,6 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
             }
         }
     }
-
-    private val adapter = CharacterListAdapter( this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

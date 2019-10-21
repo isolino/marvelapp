@@ -41,7 +41,7 @@ class CharacterListAdapter(
             ERROR_VIEW -> {
                 val itemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.layout_error_list_item, parent, false)
-                LoadingViewHolder(itemView)
+                ErrorViewHolder(itemView)
             }
             else -> throw IllegalStateException("viewType $viewType is not correct")
         }
