@@ -45,7 +45,7 @@ class CharacterListAdapter(
     override fun getItemViewType(position: Int): Int {
         return when{
             characters[position] == CharacterModel.LOADING -> LOADING_VIEW
-            position == characters.lastIndex && position != 0 -> LOADING_VIEW//todo trate exausted
+            position == characters.lastIndex && position != 0 -> LOADING_VIEW
             else -> CHARACTER_VIEW
         }
     }
