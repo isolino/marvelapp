@@ -3,10 +3,9 @@ package br.com.marvel.characters.requests
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import br.com.marvel.BuildConfig
 import br.com.marvel.characters.models.CharacterModel
 import br.com.marvel.characters.requests.responses.CharactersResponse
-import br.com.marvel.common.Constants.PRIVATE_KEY
-import br.com.marvel.common.Constants.PUBLIC_KEY
 import br.com.marvel.common.md5
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,13 +22,13 @@ class MarvelApiClient {
     fun fetchChars(offset: Int){
 
         val ts = System.currentTimeMillis().toString()
-        val concatenation = ts + PRIVATE_KEY + PUBLIC_KEY
+        val concatenation = ts + BuildConfig.PRIVATE_KEY + BuildConfig.PUBLIC_KEY
         val hash = concatenation.md5()
 
         _characters.postValue(Resource.Loading(_characters.value?.data.orEmpty()))
 
         ServiceGenerator.getMarvelApi().getCharacters(
-            offset = offset, ts = ts, apiKey = PUBLIC_KEY, hash = hash
+            offset = offset, ts = ts, apiKey = BuildConfig.PUBLIC_KEY, hash = hash
         ).enqueue(CharsCallback(_characters))
 
     }
