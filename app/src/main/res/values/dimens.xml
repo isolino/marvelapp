@@ -1,0 +1,9 @@
+<resources>
+
+    <!--genaral spacing-->
+    <dimen name="spacing_medium">5dp</dimen>
+    <dimen name="spacing_large">15dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="recycler_loading_view_heigth">80dp</dimen>
+</resources>
