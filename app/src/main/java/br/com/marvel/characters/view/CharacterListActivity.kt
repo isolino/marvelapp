@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CharacterListActivity : BaseActivity(), OnCharacterListener {
 
     companion object {
-        val DETAIL_REQUEST = 1
+        const val DETAIL_REQUEST = 1
     }
 
     private val characterViewModel : CharacterListViewModel by viewModel()
@@ -64,7 +64,6 @@ class CharacterListActivity : BaseActivity(), OnCharacterListener {
     }
 
     override fun onCharacterClick(position: Int) {
-        Toast.makeText(this, "Hero #$position has been clicked!", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, CharacterDetailActivity::class.java)
         intent.putExtra("hero", adapter.getCharacterInPosition(position))
         startActivityForResult(intent, DETAIL_REQUEST)
